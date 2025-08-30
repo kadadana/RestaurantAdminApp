@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Giriş Yap</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+        <div class="w-100" style="max-width: 420px;">
+            <h1 class="mb-4 text-center">Giriş Yap</h1>
+
+            <% if (error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <form method="POST" action="/login" class="card p-4 shadow">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Kullanıcı Adı</label>
+                <input name="username" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Şifre</label>
+                <input type="password" name="password" class="form-control" required />
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Giriş</button>
+            </form>
+        </div>
+    </body>
+</html>

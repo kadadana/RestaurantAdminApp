@@ -11,12 +11,7 @@
 <body>
     <%- include("partials/navbar") %>
 
-        <% if(isAll){ %>
-            <h1 class="m-3">All Product List</h1>
-        <% } else{ %>
-            <h1 class="m-3">Active Product List</h1>
-        <% } %>
-
+        <h1 class="m-3">All Product List</h1>
 
         <div class="container mt-3">
             <table class="table">
@@ -29,10 +24,10 @@
                         <th scope="col">Price</th>
                         <th scope="col">Active</th>
                         <th scope="col">Picture</th>
-                        <% if (isAll) { %>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        <% } %>
+
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -60,35 +55,34 @@
                                 <img src="<%= p.path %>" class="img-thumbnail" style="height:100px;"
                                     title="<%= p.path %>">
                             </td>
-                            <% if (isAll) { %>
-                                <td>
-                                    <a class="btn btn-primary" href="/edit/<%= p.id %>">Edit</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-danger" onclick="delProduct('<%= p.id %>')">Delete</a>
-                                </td>
-                            <% } %>
-                            
+                            <td>
+                                <a class="btn btn-primary" href="/edit/<%= p.id %>">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" onclick="delProduct('<%= p.id %>')">Delete</a>
+                            </td>
                         </tr>
-
                         <% }) %>
                 </tbody>
             </table>
         </div>
 
 </body>
-<script>
-function delProduct(id) {
-    if (!confirm('Are you sure you want to delete this product?')) return;
+<% if(isAll){ %>
+    <script>
+        function delProduct(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
 
-    fetch('/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-    })
-    .then(res => {
-        if(res.ok) location.reload();
-    });
-}
-</script>
+            fetch('/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            })
+                .then(res => {
+                    if (res.ok) location.reload();
+                });
+        }
+    </script>
+    <% }%>
+
 </html>

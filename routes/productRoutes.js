@@ -1,7 +1,7 @@
 import express from "express";
+import { requireAuth } from "../auth.js";
 import {
     getAllProducts,
-    getActiveProducts,
     getAddPage,
     getEditPage,
     addProduct,
@@ -12,9 +12,9 @@ import {
 import { upload } from "../helpers/upload.js";
 
 const router = express.Router();
+router.use(requireAuth);
 
-router.get("/", getActiveProducts);
-router.get("/allProducts", getAllProducts);
+router.get("/", getAllProducts);
 router.get("/add", getAddPage);
 router.get("/edit/:id", getEditPage);
 router.post("/add", upload.single("image"), addProduct);

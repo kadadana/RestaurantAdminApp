@@ -3,16 +3,12 @@ import { formatPrice } from "../helpers/helper.js";
 import Product from "../models/Product.js";
 import fs from "fs";
 
+
+
 export const getAllProducts = async (req, res) => {
     const products = await ProductRepository.getAll();
     const isAll = true;
-    res.render("index", { products, isAll });
-};
-
-export const getActiveProducts = async (req, res) => {
-    const products = await ProductRepository.getActives();
-    const isAll = false;
-    res.render("index", { products, isAll });
+    res.render("productlist", { products, isAll });
 };
 
 export const getAddPage = async (req, res) => {
@@ -43,7 +39,7 @@ export const addProduct = async (req, res) => {
         const { name, category, description, price } = req.body;
         const isActive = req.body.isActive ? true : false;
 
-        const formattedPrice = formatPrice(price);
+        const formattedPrice = parseFloat(formatPrice(price));
 
         const id = await ProductRepository.findLatestId();
 
@@ -96,7 +92,7 @@ export const editProduct = async (req, res) => {
         let price = req.body.price;
         const isActive = req.body.isActive ? true : false;
 
-        const formattedPrice = formatPrice(price);
+        const formattedPrice = parseFloat(formatPrice(price));
 
         const imgPath = "pics/" + id + ".jpeg";
 
