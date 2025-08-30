@@ -12,4 +12,5 @@ Features<br/>
 -CRUD operations<br/>
 -Product adding, deleting, updating<br/>
 -Picture uploading, updating and displaying<br/>
--Filtering(on the way)<br/>
+-Filtering<br/>
+-Menu and QR code for customers<br/> 
