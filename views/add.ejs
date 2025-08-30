@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <title>Add Product</title>
+</head>
+
+<body>
+    <%- include("partials/navbar") %>
+        <h1 class="m-3">Add Product</h1>
+        <div class="container mt-3">
+            <form action="/add" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="id" style="font-weight: bold;">Product Name</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Id" readonly
+                    value="<%= id %>">
+                </div>
+                <div class="form-group">
+                    <label for="name" style="font-weight: bold;">Product Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                </div>
+                <label for="category" style="font-weight: bold;">Category:</label>
+                <select name="category" id="category" class="form-select">
+
+                    <option value="food">Food</option>
+
+                    <option value="hot-drinks">Hot Drinks</option>
+
+                    <option value="cold-drinks">Cold Drinks</option>
+
+                    <option value="desserts">Desserts</option>
+
+                </select>
+                <div class="form-group">
+                    <label for="description" style="font-weight: bold;">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+                </div>
+                <div class="form-group">
+                    <label for="price" style="font-weight: bold;">Price</label>
+                    <input type="number" min="0" step="0.01" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="isActive">
+                        Is Active
+                    </label>
+                    <input class="form-check-input" type="checkbox" name="isActive" value="true" id="isActive" checked>
+                </div>
+                <div class="form-group">
+
+                    <label for="path" style="font-weight: bold;">Picture</label>
+                    <div>
+                        <input class="form-control" type="file" id="path" name="image">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+</body>
+
+</html>

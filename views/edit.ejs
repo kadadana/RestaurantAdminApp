@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <title>Edit Product</title>
+</head>
+
+<body>
+    <%- include("partials/navbar") %>
+        <h1 class="m-3">Edit Product</h1>
+        <div class="container mt-3">
+            <form action="/edit" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="id" style="font-weight: bold;">Id</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Id" required readonly
+                        value="<%= product.id %>">
+                </div>
+                <div class="form-group">
+                    <label for="name" style="font-weight: bold;">Product Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required
+                        value="<%= product.name %>">
+                </div>
+                <label for="category" style="font-weight: bold;">Category:</label>
+                <select name="category" id="category" class="form-select">
+
+                    <option value="food" 
+                    <% if (product.category == "food") { %>
+                     selected
+                    <% } %>
+                    >Food</option>
+
+                    <option value="hot-drinks" 
+                    <% if (product.category == "hot-drinks") { %>
+                     selected
+                    <% } %>
+                    >Hot Drinks</option>
+
+                    <option value="cold-drinks" 
+                    <% if (product.category == "cold-drinks") { %>
+                     selected
+                    <% } %>
+                    >Cold Drinks</option>
+
+                    <option value="desserts" 
+                    <% if (product.category == "desserts") { %>
+                     selected
+                    <% } %>
+                    >Desserts</option>
+
+                </select>
+                <div class="form-group" style="font-weight: bold;">    
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" name="description"
+                        placeholder="Description" required value="<%= product.description %>">
+                </div>
+                <div class="form-group" style="font-weight: bold;">
+                    <label for="price">Price</label>
+                    <input type="number" min="0" step="0.01" class="form-control" id="price" name="price" required
+                        value="<%= product.price.replace(",", ".") %>">
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label"for="isActive">
+                        Is Active
+                    </label>
+                    <input class="form-check-input" type="checkbox" name="isActive" value="true" id="isActive"
+                    <% if (product.isActive) {%>checked<%} else {%>unchecked<%}%>
+                    >
+                </div>
+                <div class="form-group" style="font-weight: bold;">
+                    <label for="path">Picture</label>
+                    <input class="form-control" type="file" id="path" name="image">
+                </div>
+                <div>
+                    <% if (fileExists) { %>
+                        <img src="../<%= product.path %>" class="img-thumbnail" 
+                        style="height:100px;"" title="<%= product.path %>">
+                        <button type="button" class="btn btn-danger"
+                         onclick="delPic('<%= product.id %>')">Delete Picture</button>
+                        <% } %>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-danger" onclick="delProduct('<%= product.id %>')">Delete Product</a>
+                </div>
+            </form>
+            
+
+        </div>
+</body>
+<script>
+function delProduct(id) {
+    if (!confirm('Are you sure you want to delete this product?')) return;
+
+    fetch('/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+    })
+    .then(res => {
+        if(res.ok) location.reload();
+    });
+};
+
+function delPic(id) {
+    if (!confirm('Are you sure you want to delete this picture?')) return;
+
+    fetch('/delPic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+    })
+    .then(res => {
+        if(res.ok) location.reload();
+    });
+};
+</script>
+
+</html>
