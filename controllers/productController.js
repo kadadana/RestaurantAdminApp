@@ -7,8 +7,16 @@ import fs from "fs";
 
 export const getAllProducts = async (req, res) => {
     const products = await ProductRepository.getAll();
-    const isAll = true;
-    res.render("productlist", { products, isAll });
+    res.render("productlist", { products });
+};
+
+export const getFilteredProducts = async (req, res) => {
+    const filterKey = req.query.field;
+    const filterValue = req.query.value;
+
+    console.log(filterKey + " " + filterValue);
+    const products = await ProductRepository.getFilteredProducts(filterKey, filterValue);
+    res.render("productlist", { products });
 };
 
 export const getAddPage = async (req, res) => {

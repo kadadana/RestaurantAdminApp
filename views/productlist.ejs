@@ -11,78 +11,132 @@
 <body>
     <%- include("partials/navbar") %>
 
-        <h1 class="m-3">All Product List</h1>
-
-        <div class="container mt-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Picture</th>
-
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <% products.forEach(p=> { %>
-                        <tr style="height: 100px;">
-                            <td>
-                                <%= p.id %>
-                            </td>
-                            <td>
-                                <%= p.name %>
-                            </td>
-                            <td>
-                                <%= p.category %>
-                            </td>
-                            <td>
-                                <%= p.description %>
-                            </td>
-                            <td>
-                                <%= p.price %>
-                            </td>
-                            <td>
-                                <%= p.isActive %>
-                            </td>
-                            <td>
-                                <img src="<%= p.path %>" class="img-thumbnail" style="height:100px;"
-                                    title="<%= p.path %>">
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href="/edit/<%= p.id %>">Edit</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" onclick="delProduct('<%= p.id %>')">Delete</a>
-                            </td>
-                        </tr>
-                        <% }) %>
-                </tbody>
-            </table>
+        <div class="d-flex justify-content-between align-items-center mb-3 ms-5 me-5">
+            <h1>All Product List</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchModal">
+                Search
+            </button>
         </div>
 
-</body>
-<% if(isAll){ %>
-    <script>
-        function delProduct(id) {
-            if (!confirm('Are you sure you want to delete this product?')) return;
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="searchForm" method="GET" action="/search">
+                        <div class="modal-body">
+                            <label for="field">Field:</label>
+                            <select name="field" id="field" class="form-select">
+                                <option value="id">Id</option>
+                                <option value="name">Name</option>
+                                <option value="category">Category</option>
+                                <option value="isActive">Activity</option>
+                            </select>
 
-            fetch('/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: id })
-            })
-                .then(res => {
-                    if (res.ok) location.reload();
-                });
+                            <label for="value">Value:</label>
+                            <div id="searchValueContainer">
+                                <input type="text" name="value" id="value" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" href="/" class="btn btn-danger">Clear</a>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid mt-3">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Picture</th>
+
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(p=> { %>
+                            <tr style="height: 100px;">
+                                <td>
+                                    <%= p.id %>
+                                </td>
+                                <td>
+                                    <%= p.name %>
+                                </td>
+                                <td>
+                                    <%= p.category %>
+                                </td>
+                                <td>
+                                    <%= p.description %>
+                                </td>
+                                <td>
+                                    <%= p.price %>
+                                </td>
+                                <td>
+                                    <%= p.isActive %>
+                                </td>
+                                <td>
+                                    <img src="<%= p.path %>" class="img-thumbnail" style="height:100px;"
+                                        title="<%= p.path %>">
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="/edit/<%= p.id %>">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" onclick="delProduct('<%= p.id %>')">Delete</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+    const fieldSelect = document.getElementById("field");
+    const container = document.getElementById("searchValueContainer");
+
+    fieldSelect.addEventListener("change", function () {
+        if (fieldSelect.value === "isActive") {
+            container.innerHTML = `<input class="form-check-input" type="checkbox" name="value" value="true">`;
+        } else if (fieldSelect.value === "category") {
+            container.innerHTML = `<select name="value" id="value" class="form-select">
+                    <option value="food">Food</option>
+                    <option value="hot-drinks" >Hot Drinks</option>
+                    <option value="cold-drinks" >Cold Drinks</option>
+                    <option value="desserts">Desserts</option>
+                </select>`;
+
+        } else {
+            container.innerHTML = `<input type="text" class="form-control" name="value" required>`;
         }
-    </script>
-    <% }%>
+    });
+
+
+
+    function delProduct(id) {
+        if (!confirm('Are you sure you want to delete this product?')) return;
+
+        fetch('/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        })
+            .then(res => {
+                if (res.ok) location.reload();
+            });
+    };
+</script>
 
 </html>

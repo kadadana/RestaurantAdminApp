@@ -2,6 +2,7 @@ import express from "express";
 import { requireAuth } from "../auth.js";
 import {
     getAllProducts,
+    getFilteredProducts,
     getAddPage,
     getEditPage,
     addProduct,
@@ -15,6 +16,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/", getAllProducts);
+router.get("/search", getFilteredProducts);
 router.get("/add", getAddPage);
 router.get("/edit/:id", getEditPage);
 router.post("/add", upload.single("image"), addProduct);

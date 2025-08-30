@@ -1,4 +1,4 @@
-import { delPic } from "../controllers/productController.js";
+import { delPic, getFilteredProducts } from "../controllers/productController.js";
 import { getDB } from "../db.js";
 import Product from "../models/Product.js";
 
@@ -23,6 +23,24 @@ export const ProductRepository = {
             collection("products")
             .find({})
             .toArray();
+        return this.getProductList(results);
+    },
+    async getFilteredProducts(filterKey, filterValue) {
+        const db = getDB();
+        let query = {};
+
+        if (filterKey === "isActive") {
+            filterValue = filterValue === "true";
+            query[filterKey] = filterValue;
+        } else {
+            query[filterKey] = { $regex: filterValue, $options: "i" };
+        }
+
+        const results = await db
+            .collection("products")
+            .find(query)
+            .toArray();
+
         return this.getProductList(results);
     },
     async getActives() {
@@ -75,7 +93,7 @@ export const ProductRepository = {
             .deleteOne({ id: id });
     },
     async delPic(id, imgPath) {
-        
+
         const db = getDB();
         await db
             .collection("products")
