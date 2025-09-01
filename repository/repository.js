@@ -25,6 +25,16 @@ export const ProductRepository = {
             .toArray();
         return this.getProductList(results);
     },
+
+    async getMenuByCategory(category) {
+        const db = getDB();
+        const results = await db.
+            collection("products")
+            .find({$and: [{ category: category }, { isActive: true }]})
+            .toArray();
+        return this.getProductList(results);
+    },
+
     async getFilteredProducts(filterKey, filterValue) {
         const db = getDB();
         let query = {};

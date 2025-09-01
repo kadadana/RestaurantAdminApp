@@ -1,0 +1,16 @@
+<!-- menulist partial -->
+<div class="menu-list-container">
+  <h2 class="menu-category-title"><%= categoryName %></h2>
+  <div class="menu-items">
+    <% products.forEach(product => { %>
+      <div class="menu-item">
+        <div class="item-photo" style="background-image: url('../<%= product.path %>');"></div>
+        <div class="item-info">
+          <div class="item-name"><%= product.name %></div>
+          <div class="item-desc"><%= product.description %></div>
+        </div>
+        <div class="item-price">$<%= product.price %></div>
+      </div>
+    <% }) %>
+  </div>
+</div>

@@ -11,25 +11,18 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <table>
-                <% Object.keys(categoryList).forEach(c => { %>
-                <td class="categories"
-                style="background-image: url('srcpics/<%= c%>.png');"
-                >  <span class="categoryName"><%= categoryList[c] %></span>
-            </td>
-            <% }) %>
-            </table>
+    <div class="layout">
+        <div class="top">
+        <% Object.keys(categoryList).forEach(c => { %>
+            <div class="category" 
+                data-category="<%= c %>"
+                style="background-image: url('../srcpics/<%= c %>.png');"
+                onclick="window.location.href='/menu/<%= c %>'">
+            <span class="categoryName"><%= categoryList[c] %></span>
+            </div>
+        <% }) %>
         </div>
+        <%- include(includingway) %>
     </div>
-    <div class="bg-container">
-        <div class="welcome-wrapper">
-            <div class="welcome-main">Welcome to the Restaurant</div>
-            <div class="welcome-sub">You can start by choosing categories on top of the page</div>
-        </div>
-</div>
-
 </body>
-
 </html>

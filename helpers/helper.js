@@ -16,7 +16,7 @@ export function formatPrice(input) {
 };
 
 const categoryList = {
-    "food" : "Food",
+    "dish" : "Dish",
     "cold-drinks" : "Cold Drinks",
     "hot-drinks" : "Hot Drinks",
     "desserts" : "Desserts"

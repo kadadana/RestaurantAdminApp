@@ -1,69 +1,192 @@
-.categories {
-  position: relative;
-  border: 4px solid #333; /* border burada kalır */
-  width: 100px;
-  height: 10vw;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden; /* blur taşmasın */
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.categories::after {
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top {
+  flex: 0 0 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  height: 10vh;
+}
+
+.category {
+  position: relative;
+  flex: 1;
+  border: 4px solid #333;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.category::before {
   content: "";
   position: absolute;
   inset: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  transform: scale(1.05);
   z-index: 0;
-  backdrop-filter: blur(0.25px);
 }
+
 .categoryName {
-  font-family: 'Lobster Two', cursive;
   position: relative;
   z-index: 1;
-  font-size: 3vw;
+  font-size: 1.5vw;
+  font-family: 'Lobster Two', cursive;
   color: #ffe079;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   -webkit-text-stroke: 0.05vw black;
-
-
+  text-align: center;
 }
 
-.bg-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+
+.bottom {
+  flex: 1;
   background-image: url('/srcpics/menu-bg.png');
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.welcome-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .welcome-main {
   font-family: 'Lobster Two', cursive;
-  font-size: 10vw;
-  width: 60vw;
+  font-size: 8vw;
+  width: 60%;
   color: #ffe079;
-  text-align: center;
   -webkit-text-stroke: 0.05vw black;
+  text-align: center;
 }
 
 .welcome-sub {
   font-family: 'Lobster Two', cursive;
-  font-size: 5vw;
-  width: 60vw;
+  width: 50%;
+  font-size: 4vw;
   color: #ffe079;
-  text-align: center;
   -webkit-text-stroke: 0.05vw black;
+  text-align: center;
+}
 
+.menu-list-container {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  background-image: url('/srcpics/menu-bg.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.menu-category-title {
+  font-family: 'Lobster Two', cursive;
+  font-size: 10vw;
+  color: #ffe079;
+  -webkit-text-stroke: 0.05vw black;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.menu-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+.item-photo {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.item-name {
+  font-family: 'Lobster Two', cursive;
+  color: #ffe079;
+  -webkit-text-stroke: 0.03vw black;
+  font-size: 1.2rem;
+}
+
+.item-desc {
+  font-family: 'Lobster Two', cursive;
+  color: #ffe079;
+  font-size: 1rem;
+}
+
+.item-price {
+  font-family: 'Lobster Two', cursive;
+  color: #ffe079;
+  -webkit-text-stroke: 0.03vw black;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+/* mobil için */
+@media (max-width: 768px) {
+  .item-photo { width: 60px; height: 60px; }
+  .item-name { font-size: 1rem; }
+  .item-desc { font-size: 0.9rem; }
+  .item-price { font-size: 1rem; }
+}
+
+
+.menu-item .item-name {
+  font-size: 1.2rem;
+}
+
+.menu-item .item-price {
+  font-size: 1.2rem;
+}
+
+
+@media (max-width: 768px) {
+  .categoryName {
+    font-size: 18px;
+    -webkit-text-stroke: 0.2px black;
+  }
+}
+
+@media (max-width: 480px) {
+  .categoryName {
+    font-size: 16px;
+    -webkit-text-stroke: 0.2px black;
+  }
 }
