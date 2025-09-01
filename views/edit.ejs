@@ -27,32 +27,32 @@
                 <label for="category" style="font-weight: bold;">Category:</label>
                 <select name="category" id="category" class="form-select">
 
-                    <option value="food" 
-                    <% if (product.category == "food") { %>
-                     selected
-                    <% } %>
-                    >Food</option>
+                    <option value="food" <% if (product.category=="food" ) { %>
+                        selected
+                        <% } %>
+                            >Food
+                    </option>
 
-                    <option value="hot-drinks" 
-                    <% if (product.category == "hot-drinks") { %>
-                     selected
-                    <% } %>
-                    >Hot Drinks</option>
+                    <option value="hot-drinks" <% if (product.category=="hot-drinks" ) { %>
+                        selected
+                        <% } %>
+                            >Hot Drinks
+                    </option>
 
-                    <option value="cold-drinks" 
-                    <% if (product.category == "cold-drinks") { %>
-                     selected
-                    <% } %>
-                    >Cold Drinks</option>
+                    <option value="cold-drinks" <% if (product.category=="cold-drinks" ) { %>
+                        selected
+                        <% } %>
+                            >Cold Drinks
+                    </option>
 
-                    <option value="desserts" 
-                    <% if (product.category == "desserts") { %>
-                     selected
-                    <% } %>
-                    >Desserts</option>
+                    <option value="desserts" <% if (product.category=="desserts" ) { %>
+                        selected
+                        <% } %>
+                            >Desserts
+                    </option>
 
                 </select>
-                <div class="form-group" style="font-weight: bold;">    
+                <div class="form-group" style="font-weight: bold;">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" name="description"
                         placeholder="Description" required value="<%= product.description %>">
@@ -63,12 +63,12 @@
                         value="<%= product.price %>">
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"for="isActive">
+                    <label class="form-check-label" for="isActive">
                         Is Active
                     </label>
-                    <input class="form-check-input" type="checkbox" name="isActive" value="true" id="isActive"
-                    <% if (product.isActive) {%>checked<%} else {%>unchecked<%}%>
-                    >
+                    <input class="form-check-input" type="checkbox" name="isActive" value="true" id="isActive" <% if
+                        (product.isActive) {%>checked<%} else {%>unchecked<%}%>
+                            >
                 </div>
                 <div class="form-group" style="font-weight: bold;">
                     <label for="path">Picture</label>
@@ -76,10 +76,10 @@
                 </div>
                 <div>
                     <% if (fileExists) { %>
-                        <img src="../<%= product.path %>" class="img-thumbnail" 
-                        style="height:100px;"" title="<%= product.path %>">
-                        <button type="button" class="btn btn-danger"
-                         onclick="delPic('<%= product.id %>')">Delete Picture</button>
+                        <img src="../<%= product.path %>" class="img-thumbnail" style="height:100px;"" title="
+                            <%=product.path %>">
+                        <button type="button" class="btn btn-danger" onclick="delPic('<%= product.id %>')">Delete
+                            Picture</button>
                         <% } %>
                 </div>
                 <div>
@@ -87,36 +87,38 @@
                     <a class="btn btn-danger" onclick="delProduct('<%= product.id %>')">Delete Product</a>
                 </div>
             </form>
-            
+
 
         </div>
+        <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-function delProduct(id) {
-    if (!confirm('Are you sure you want to delete this product?')) return;
 
-    fetch('/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-    })
-    .then(res => {
-        if(res.ok) location.reload();
-    });
-};
+    function delProduct(id) {
+        if (!confirm('Are you sure you want to delete this product?')) return;
 
-function delPic(id) {
-    if (!confirm('Are you sure you want to delete this picture?')) return;
+        fetch('/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        })
+            .then(res => {
+                if (res.ok) window.location.href = "/dashboard";
+            });
+    };
 
-    fetch('/delPic', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-    })
-    .then(res => {
-        if(res.ok) location.reload();
-    });
-};
+    function delPic(id) {
+        if (!confirm('Are you sure you want to delete this picture?')) return;
+
+        fetch('/delPic', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        })
+            .then(res => {
+                if (res.ok) location.reload();
+            });
+    };
 </script>
 
 </html>

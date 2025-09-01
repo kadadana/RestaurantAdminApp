@@ -8,7 +8,7 @@ export const postLogin = (req, res) => {
 
   if (username === process.env.restaurantADMIN_USER && password === process.env.restaurantADMIN_PASSWD) {
     req.session.user = { username };
-    return res.redirect("/");
+    return res.redirect("/dashboard");
   }
 
   return res.status(401).render("login", { error: "Invalid username or password." });

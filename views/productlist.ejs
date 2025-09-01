@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a type="button" href="/" class="btn btn-danger">Clear</a>
+                            <a type="button" href="/dashboard" class="btn btn-danger">Clear</a>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form>
@@ -66,32 +66,32 @@
                     <tbody>
                         <% products.forEach(p=> { %>
                             <tr style="height: 100px;">
-                                <td>
+                                <td style="min-width: 80px">
                                     <%= p.id %>
                                 </td>
-                                <td>
+                                <td style="min-width: 100px">
                                     <%= p.name %>
                                 </td>
-                                <td>
+                                <td style="min-width: 100px">
                                     <%= p.category %>
                                 </td>
-                                <td>
+                                <td style="min-width: 150px">
                                     <%= p.description %>
                                 </td>
-                                <td>
+                                <td style="min-width: 80px">
                                     <%= p.price %>
                                 </td>
-                                <td>
+                                <td style="min-width: 80px">
                                     <%= p.isActive %>
                                 </td>
-                                <td>
+                                <td style="min-width: 150px">
                                     <img src="<%= p.path %>" class="img-thumbnail" style="height:100px;"
                                         title="<%= p.path %>">
                                 </td>
-                                <td>
+                                <td style="width: 80px">
                                     <a class="btn btn-primary" href="/edit/<%= p.id %>">Edit</a>
                                 </td>
-                                <td>
+                                <td style="width: 80px">
                                     <a class="btn btn-danger" onclick="delProduct('<%= p.id %>')">Delete</a>
                                 </td>
                             </tr>
@@ -134,7 +134,7 @@
             body: JSON.stringify({ id: id })
         })
             .then(res => {
-                if (res.ok) location.reload();
+                if (res.ok) window.location.href = "/dashboard";
             });
     };
 </script>

@@ -13,4 +13,13 @@ export function formatPrice(input) {
     decimal = (decimal || "0").padEnd(2, "0").slice(0, 2);
 
     return whole + "." + decimal;
-}
+};
+
+const categoryList = {
+    "food" : "Food",
+    "cold-drinks" : "Cold Drinks",
+    "hot-drinks" : "Hot Drinks",
+    "desserts" : "Desserts"
+};
+
+export default categoryList;

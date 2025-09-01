@@ -1,0 +1,69 @@
+.categories {
+  position: relative;
+  border: 4px solid #333; /* border burada kalır */
+  width: 100px;
+  height: 10vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden; /* blur taşmasın */
+}
+
+.categories::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(0.25px);
+}
+.categoryName {
+  font-family: 'Lobster Two', cursive;
+  position: relative;
+  z-index: 1;
+  font-size: 3vw;
+  color: #ffe079;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-text-stroke: 0.05vw black;
+
+
+}
+
+.bg-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('/srcpics/menu-bg.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.welcome-main {
+  font-family: 'Lobster Two', cursive;
+  font-size: 10vw;
+  width: 60vw;
+  color: #ffe079;
+  text-align: center;
+  -webkit-text-stroke: 0.05vw black;
+}
+
+.welcome-sub {
+  font-family: 'Lobster Two', cursive;
+  font-size: 5vw;
+  width: 60vw;
+  color: #ffe079;
+  text-align: center;
+  -webkit-text-stroke: 0.05vw black;
+
+}

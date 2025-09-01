@@ -6,6 +6,8 @@ import session from "express-session";
 
 import productRouter from "./routes/productRoutes.js";
 import authRouter from "./routes/authRoutes.js";
+import menuRouter from "./routes/menuRoutes.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +36,7 @@ app.use(
   })
 );
 
+app.use(menuRouter);
 app.use(authRouter)
 app.use(productRouter);
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/mycss/style.css">
+    <title>Restaurant Menu</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <table>
+                <% Object.keys(categoryList).forEach(c => { %>
+                <td class="categories"
+                style="background-image: url('srcpics/<%= c%>.png');"
+                >  <span class="categoryName"><%= categoryList[c] %></span>
+            </td>
+            <% }) %>
+            </table>
+        </div>
+    </div>
+    <div class="bg-container">
+        <div class="welcome-wrapper">
+            <div class="welcome-main">Welcome to the Restaurant</div>
+            <div class="welcome-sub">You can start by choosing categories on top of the page</div>
+        </div>
+</div>
+
+</body>
+
+</html>

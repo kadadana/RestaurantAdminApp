@@ -14,7 +14,6 @@ export const getFilteredProducts = async (req, res) => {
     const filterKey = req.query.field;
     const filterValue = req.query.value;
 
-    console.log(filterKey + " " + filterValue);
     const products = await ProductRepository.getFilteredProducts(filterKey, filterValue);
     res.render("productlist", { products });
 };
@@ -42,7 +41,6 @@ export const getEditPage = async (req, res) => {
 
 export const addProduct = async (req, res) => {
     try {
-        console.log(req.body);
 
         const { name, category, description, price } = req.body;
         const isActive = req.body.isActive ? true : false;
@@ -65,7 +63,7 @@ export const addProduct = async (req, res) => {
 
         await ProductRepository.add(product);
 
-        res.redirect("/");
+        res.redirect("/dashboard");
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -115,7 +113,7 @@ export const editProduct = async (req, res) => {
         );
         await ProductRepository.update(id, product);
 
-        res.redirect("/");
+        res.redirect("/dashboard");
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -137,10 +135,10 @@ export const deleteProduct = async (req, res) => {
             });
         };
 
-        res.redirect("/allproducts");
+        res.redirect("/dashboard");
 
 
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-}
+};

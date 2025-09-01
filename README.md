@@ -1,5 +1,5 @@
 RestauranAdminApp<br /><br />
-A web application for restaurants that can create a web-based menu to present to the customers.<br/><br/>
+A web application for restaurant to create and provide a web-based menu to customers. .<br/><br/>
 
 Technologies<br/>
 -Node.js: Server-side<br/>
