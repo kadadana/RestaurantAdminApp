@@ -16,6 +16,7 @@ import { upload } from "../helpers/upload.js";
 const router = express.Router();
 router.use(requireAuth);
 
+router.get("/", getAllProducts);
 router.get("/dashboard", getAllProducts);
 router.get("/search", getFilteredProducts);
 router.get("/add", getAddPage);
