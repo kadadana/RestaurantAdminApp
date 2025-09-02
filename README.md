@@ -13,4 +13,4 @@ Features<br/>
 -Product adding, deleting, updating<br/>
 -Picture uploading, updating and displaying<br/>
 -Filtering<br/>
--Menu and QR code for customers(on the way)<br/> 
+-Menu and QR code for customers<br/> 

@@ -1,4 +1,4 @@
-import { delPic, getFilteredProducts } from "../controllers/productController.js";
+import { delPic, getFilteredProducts } from "../controllers/adminController.js";
 import { getDB } from "../db.js";
 import Product from "../models/Product.js";
 

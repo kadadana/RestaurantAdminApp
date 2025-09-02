@@ -2,6 +2,8 @@ import { ProductRepository } from "../repository/repository.js";
 import { formatPrice } from "../helpers/helper.js";
 import Product from "../models/Product.js";
 import fs from "fs";
+import QRCode from "qrcode";
+import path from "path";
 
 
 
@@ -141,4 +143,26 @@ export const deleteProduct = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+};
+
+export const generateQr = async (req, res) => {
+   try {
+    const url = 'http://localhost:3000/menu';
+    const dirPath = path.join('public', 'qrcode');
+    const qrPath = path.join(dirPath, "qr.jpeg");
+    
+    fs.mkdirSync(dirPath, { recursive: true });
+
+    if (!fs.existsSync(qrPath)) {
+      await QRCode.toFile(qrPath, url, {
+        type: "jpeg",
+        width: 300,
+        margin: 2,
+      });
+    }
+
+    res.download(qrPath, 'qr.jpeg')
+   } catch (err) {
+    res.status(500).send({ error: err.message });
+   }
 };

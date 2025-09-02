@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { connectDB } from "./db.js";
 import session from "express-session";
 
-import productRouter from "./routes/productRoutes.js";
+import productRouter from "./routes/adminRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import menuRouter from "./routes/menuRoutes.js";
 
@@ -41,8 +41,10 @@ app.use(authRouter)
 app.use(productRouter);
 
 connectDB().then(() => {
-    app.listen(3000, () => console.log("Server is up on port 3000"));
-    
+  app.listen(3000, () => console.log("Server is up on port 3000"));
+  console.log("Click for admin side: " + "http://localhost:3000/");
+  console.log("Click for customer side: " + "http://localhost:3000/menu");
+
 }).catch(err => {
-    console.error("DB connection error:", err);
+  console.error("DB connection error:", err);
 });

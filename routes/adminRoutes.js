@@ -9,7 +9,8 @@ import {
     delPic,
     editProduct,
     deleteProduct,
-} from "../controllers/productController.js";
+    generateQr,
+} from "../controllers/adminController.js";
 import { upload } from "../helpers/upload.js";
 
 const router = express.Router();
@@ -23,5 +24,7 @@ router.post("/add", upload.single("image"), addProduct);
 router.post("/delPic", delPic);
 router.post("/edit", upload.single("image"), editProduct);
 router.post("/delete", deleteProduct);
+router.get("/makeqr", generateQr);
+
 
 export default router;
